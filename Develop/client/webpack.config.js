@@ -37,9 +37,10 @@ module.exports = () => {
             sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
           },
       // Adding in service worker
-      new InjectManifest({
-
-      }),
+        new InjectManifest({
+          swSrc: './src/sw.js',
+          swDest: 'service-worker.js',
+        }), 
     ],
 
     module: {
