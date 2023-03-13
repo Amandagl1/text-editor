@@ -1,6 +1,6 @@
 # Progressive Web Applications (PWA): Text Editor
 
-Deployed Application: https://amandas-text-editor.herokuapp.com/  
+Deployed Application: [JATE](https://amandas-text-editor.herokuapp.com/)  
 
 ![ICS](https://img.shields.io/badge/license-ICS-orange)
 
