@@ -19,34 +19,37 @@ module.exports = () => {
     },
     plugins: [
       // Generate simplified HTML files
-      new HtmlWebpackPlugin({
-        template: "./index.html",
-        title: 'JATE',
-      }),
-      new InjectManifest({
-        swSrc: './src-sw.js',
-        swDest: 'src-sw.js',
-      }),
+      new HtmlWebpackPlugin
+        ({
+          template: "./index.html",
+          title: 'JATE',
+        }),
+      // Adding in service worker
+      new InjectManifest
+        ({
+          swSrc: './src-sw.js',
+          swDest: 'src-sw.js',
+        }),
       // Plugin for Manifest file
-      new WebpackPwaManifest({
-        fingerprints: false,
-        inject: true,
-        name: 'Just Another Text Editor',
-        short_name: 'JATE',
-        description: 'My awesome Progressive Web App!',
-        background_color: '#ffffff',
-        start_url: './',
-        publicPath: './',
-        icons: [
-          {
-            src: path.resolve('src/images/logo.png'),
-            sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
-            destination: path.join('assets', 'logo'),
-          },
-          // Adding in service worker
-
-        ],
-      }),
+      new WebpackPwaManifest
+        ({
+          fingerprints: false,
+          inject: true,
+          name: 'Just Another Text Editor',
+          short_name: 'JATE',
+          description: 'My awesome Progressive Web App!',
+          background_color: '#ffffff',
+          start_url: './',
+          publicPath: './',
+          icons:
+            [
+              {
+                src: path.resolve('src/images/logo.png'),
+                sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+                destination: path.join('assets', 'icons'),
+              },
+            ],
+        }),
     ],
     module: {
       rules: [
@@ -55,16 +58,13 @@ module.exports = () => {
           use: ["style-loader", "css-loader"],
         },
         {
-          test: /\.(png|svg|jpg|jpeg|gif)$/i,
-          type: 'asset/resource',
-        },
-        {
           test: /\.m?js$/,
-          exclude: /(node_modules|bower_components)/,
+          exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
             options: {
-              presets: ['@babel/preset-env']
+              presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
             }
           }
         },
