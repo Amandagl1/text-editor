@@ -22,7 +22,11 @@ module.exports = () => {
       new HtmlWebpackPlugin({
         template: "./index.html",
         title: 'JATE',
-       }),
+      }),
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'src-sw.js',
+      }),
       // Plugin for Manifest file
       new WebpackPwaManifest({
         fingerprints: false,
@@ -31,18 +35,19 @@ module.exports = () => {
         short_name: 'JATE',
         description: 'My awesome Progressive Web App!',
         background_color: '#ffffff',
+        start_url: './',
+        publicPath: './',
         icons: [
           {
-            src: path.resolve('src/assets/icon.png'),
-            sizes: [96, 128, 192, 256, 384, 512] // multiple sizes
+            src: path.resolve('src/images/icon.png'),
+            sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+            destination: path.join('assets', 'icons'),
           },
-      // Adding in service worker
-        new InjectManifest({
-          swSrc: './src/sw.js',
-          swDest: 'service-worker.js',
-        }), 
-    ],
+          // Adding in service worker
 
+        ],
+      }),
+    ],
     module: {
       rules: [
         {
@@ -52,7 +57,7 @@ module.exports = () => {
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
           type: 'asset/resource',
-        }, 
+        },
         {
           test: /\.m?js$/,
           exclude: /(node_modules|bower_components)/,
