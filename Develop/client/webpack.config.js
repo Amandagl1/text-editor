@@ -39,8 +39,8 @@ module.exports = () => {
           short_name: 'JATE',
           description: 'My awesome Progressive Web App!',
           background_color: '#ffffff',
-          start_url: './',
-          publicPath: './',
+          start_url: '/',
+          publicPath: '/',
           icons:
             [
               {
